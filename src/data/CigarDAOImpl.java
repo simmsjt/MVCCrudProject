@@ -23,8 +23,15 @@ public class CigarDAOImpl implements CigarDAO {
 
 	@Override
 	public Cigar addCigar(Cigar c) {
-		
+		int index = -1;
+		for (Cigar cigar : humidor) {
+			if(cigar.getName() == c.getName() && cigar.getBrand() == c.getBrand())
+				index = humidor.indexOf(cigar);
+		}
+		if(index == -1) {
 		humidor.add(c);
+		} else
+		humidor.get(index).setAmount(humidor.get(index).getAmount()+c.getAmount());
 		return null;
 	}
 

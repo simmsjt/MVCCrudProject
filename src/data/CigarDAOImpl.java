@@ -3,10 +3,19 @@ package data;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@Primary
 public class CigarDAOImpl implements CigarDAO {
 
-	private List<Cigar> humidor = new ArrayList<Cigar>(); 
+	private List<Cigar> humidor;
 	
+	public CigarDAOImpl() {
+		humidor = new ArrayList<Cigar>();
+		humidor.add(new Cigar("Jim", "apples", WrapperType.CLARO, Shape.CHURCHILL));
+	}
 	@Override
 	public List<Cigar> getAllCigars() {
 		return humidor;

@@ -25,17 +25,18 @@ public class HumidorController {
 		ModelAndView mv = new ModelAndView();
 		List<Cigar> allCigars = dao.getAllCigars();
 		mv.addObject("list", allCigars);
+		mv.addObject("enum", WrapperType.values());
 		mv.setViewName("index");
 		return mv;
 	}
 	
 	
-	@RequestMapping(path = "addCigar.do", method = RequestMethod.GET)
+	@RequestMapping(path = "addCigar.do", method = RequestMethod.POST)
 	public String addGiraffe(Model model) {
 		Cigar c = new Cigar("Tim", "apples", WrapperType.CLARO, Shape.CHURCHILL);
 		dao.addCigar(c);
 		model.addAttribute("cigar", c);
-		return "add";
+		return "index";
 	}
 
 }

@@ -8,15 +8,17 @@
 <title>Humidor</title>
 </head>
 <body>
-	<form action="addCigar.do" method="GET">
+	<form action="addCigar.do" method="post">
 		<input type="text" name="name">
+		
 		
 		<input type="submit" value="Submit">
 		
 	</form>
 	
 	<c:forEach var="c" items="${list}">
-		
+		${c.shape} : ${c.wrapper} : ${c.name}
+		<hr>
 	</c:forEach>
 </body>
 </html>

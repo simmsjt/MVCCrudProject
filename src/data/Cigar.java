@@ -7,6 +7,9 @@ public class Cigar {
 	private Shape shape;
 	private int amount;
 	
+	public Cigar() {
+		
+	}
 	public Cigar(String name, String brand, WrapperType wrapper, Shape shape) {
 		super();
 		this.name = name;

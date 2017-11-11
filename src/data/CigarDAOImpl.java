@@ -23,6 +23,7 @@ public class CigarDAOImpl implements CigarDAO {
 
 	@Override
 	public Cigar addCigar(Cigar c) {
+		
 		humidor.add(c);
 		return null;
 	}

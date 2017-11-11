@@ -25,19 +25,30 @@ public class HumidorController {
 		ModelAndView mv = new ModelAndView();
 		List<Cigar> allCigars = dao.getAllCigars();
 		mv.addObject("list", allCigars);
-		mv.addObject("wrapperValues", WrapperType.values());
-		mv.addObject("shapeValues", Shape.values());
 		mv.setViewName("index");
 		return mv;
 	}
 	
 	
-	@RequestMapping(path = "addCigar.do", method = RequestMethod.POST)
-	public String addGiraffe(Model model) {
-		Cigar c = new Cigar("Tim", "apples", WrapperType.CLARO, Shape.CHURCHILL);
-		dao.addCigar(c);
-		model.addAttribute("cigar", c);
+	@RequestMapping(path = "add.do", method = RequestMethod.GET)
+	public String addCigar(Model model) {
+		Cigar c = new Cigar();
+		model.addAttribute("cigar",c);
+		model.addAttribute("wrapperValues", WrapperType.values());
+		model.addAttribute("shapeValues", Shape.values());
+
+		
 		return "add";
 	}
-
+	
+	@RequestMapping(path = "addCigar.do", method = RequestMethod.POST)
+	public ModelAndView doAdd(Cigar c) {
+		ModelAndView mv = new ModelAndView();
+		dao.addCigar(c);
+		System.out.println("Cigar Added");
+		mv.setViewName("added");
+		return mv;
+	}
+	
+	
 }

@@ -9,13 +9,22 @@
 </head>
 <body>
 	<form action="addCigar.do" method="post">
-		<input type="text" name="name">
-		
-		
+		<input type="text" name="name"> 
+		<select name="wrapper">
+			<c:forEach items="${wrapperValues}" var="entry">
+				<option value="${entry}">${entry}</option>
+			</c:forEach>
+		</select>
+		<select name="shape">
+			<c:forEach items="${shapeValues}" var="entry">
+				<option value="${entry}">${entry}</option>
+			</c:forEach>
+		</select>
+
 		<input type="submit" value="Submit">
-		
+
 	</form>
-	
+
 	<c:forEach var="c" items="${list}">
 		${c.shape} : ${c.wrapper} : ${c.name}
 		<hr>

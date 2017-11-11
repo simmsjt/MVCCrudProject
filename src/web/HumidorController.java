@@ -25,7 +25,8 @@ public class HumidorController {
 		ModelAndView mv = new ModelAndView();
 		List<Cigar> allCigars = dao.getAllCigars();
 		mv.addObject("list", allCigars);
-		mv.addObject("enum", WrapperType.values());
+		mv.addObject("wrapperValues", WrapperType.values());
+		mv.addObject("shapeValues", Shape.values());
 		mv.setViewName("index");
 		return mv;
 	}
@@ -36,6 +37,7 @@ public class HumidorController {
 		Cigar c = new Cigar("Tim", "apples", WrapperType.CLARO, Shape.CHURCHILL);
 		dao.addCigar(c);
 		model.addAttribute("cigar", c);
+		model.addAttribute("wrapperType", WrapperType.values());
 		return "index";
 	}
 

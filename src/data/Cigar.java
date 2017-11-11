@@ -46,10 +46,4 @@ public class Cigar {
 		this.shape = shape;
 	}
 	
-	
-	
-	
-	
-	
-	
 }

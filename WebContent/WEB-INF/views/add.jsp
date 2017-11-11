@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Cigar Added</title>
 </head>
 <body>
-
+		<h3></h3>
+		<a href="index.jsp"> Go back to your humidor.</a>
 </body>
 </html>

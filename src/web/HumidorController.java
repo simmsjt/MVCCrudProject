@@ -37,8 +37,7 @@ public class HumidorController {
 		Cigar c = new Cigar("Tim", "apples", WrapperType.CLARO, Shape.CHURCHILL);
 		dao.addCigar(c);
 		model.addAttribute("cigar", c);
-		model.addAttribute("wrapperType", WrapperType.values());
-		return "index";
+		return "add";
 	}
 
 }

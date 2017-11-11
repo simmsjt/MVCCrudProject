@@ -5,6 +5,7 @@ public class Cigar {
 	private String brand;
 	private WrapperType wrapper;
 	private Shape shape;
+	private int amount;
 	
 	public Cigar(String name, String brand, WrapperType wrapper, Shape shape) {
 		super();
@@ -12,6 +13,7 @@ public class Cigar {
 		this.brand = brand;
 		this.wrapper = wrapper;
 		this.shape = shape;
+		amount = 0;
 	}
 
 	public String getName() {
@@ -44,6 +46,14 @@ public class Cigar {
 
 	public void setShape(Shape shape) {
 		this.shape = shape;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 	
 }

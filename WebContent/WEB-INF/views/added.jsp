@@ -7,7 +7,8 @@
 <title>Cigar added</title>
 </head>
 <body>
-	Cigar ADDED
+	Cigar Input:
+	<br>
 	Cigar name: ${cigar.name }
 	<br> Brand: ${cigar.brand }
 	<br> Wrapper Color: ${cigar.wrapper }

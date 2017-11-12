@@ -10,17 +10,27 @@
 </head>
 <body>
 	<h3>Enter data about your giraffe</h3>
-	<form:form action="updateCigar.do" method="POST"
-		modelAttribute="cigar">
+	<form:form action="updateCigar.do" method="POST" modelAttribute="cigar">
 		Name: <form:input path="name" />
-		<form:errors path="name" />
 		<br>
-		Neck Length: <form:input path="neckLength" />
-		<form:errors path="neckLength" />
+		Brand: <form:input path="brand" />
 		<br>
-		Image URL: <form:input path="imgUrl" />
-		<form:errors path="imgUrl" />
+		Amount: <form:input path="amount" />
 		<br>
+		Amount: <form:input path="amount" />
+		<br>
+		Amount: <form:input path="amount" />
+		<br>
+		wrapper: <select name="wrapper">
+			<c:forEach items="${wrapperValues}" var="entry">
+				<option value="${entry}">${entry}</option>
+			</c:forEach>
+		</select>
+			shape: <select name="shape">
+			<c:forEach items="${shapeValues}" var="entry">
+				<option value="${entry}">${entry}</option>
+			</c:forEach>
+		</select>
 		<form:hidden path="name" />
 		<input type="submit" value="Update">
 	</form:form>

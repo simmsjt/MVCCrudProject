@@ -30,6 +30,10 @@
 	<c:forEach var="c" items="${list}">
 		${c.shape} : ${c.wrapper} : ${c.name} : ${brand} : ${c.amount} 
 		<form action="deleteCigar.do" method="post"><input type="submit" value="Smoke"><input type="hidden" name="cigarName" value="${c.name}"></form>
+		<form method="post" action="update.do">
+			<input type="submit" value="Update">
+			<input type="hidden" name="name">
+		</form>
 		<hr>
 	</c:forEach>
 </body>

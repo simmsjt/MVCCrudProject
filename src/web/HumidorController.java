@@ -2,13 +2,18 @@ package web;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.skilldistillery.giraffes.data.Giraffe;
 
 import data.Cigar;
 import data.CigarDAO;
@@ -53,6 +58,24 @@ public class HumidorController {
 		ModelAndView mv = new ModelAndView();
 		dao.addCigar(c);
 		System.out.println("Cigar Added");
+		mv.setViewName("added");
+		return mv;
+	}
+	
+	@RequestMapping(path="update.do" , params="id")
+	public ModelAndView update(
+			@RequestParam("name") String name) {
+		ModelAndView mv = new ModelAndView("update");
+		Cigar c = dao.getCigarByName(name);
+		mv.addObject("cigar",c);
+		return mv;
+	}
+	
+	
+	@RequestMapping(path = "updateCigar.do", method = RequestMethod.POST)
+	public ModelAndView doUpdate(@Valid Cigar c) {
+		ModelAndView mv = new ModelAndView();
+		dao.editCigar(c);
 		mv.setViewName("added");
 		return mv;
 	}

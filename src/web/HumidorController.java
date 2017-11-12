@@ -62,15 +62,17 @@ public class HumidorController {
 	@RequestMapping(path="update.do")
 	public ModelAndView update(@RequestParam("name") String name) {
 		ModelAndView mv = new ModelAndView("update");
-		mv.addObject("cigar", dao.getCigarByName(name));
+		Cigar c = dao.getCigarByName(name);
+		mv.addObject("cigar", c);
 		mv.addObject("wrapperValues", WrapperType.values());
 		mv.addObject("shapeValues", Shape.values());
+		mv.addObject("amount", c.getAmount());
 		return mv;
 	}
 	
 	
 	@RequestMapping(path = "updateCigar.do", method = RequestMethod.POST)
-	public ModelAndView doUpdate(@Valid Cigar c) {
+	public ModelAndView doUpdate(Cigar c) {
 		ModelAndView mv = new ModelAndView();
 		dao.editCigar(c);
 		mv.setViewName("added");

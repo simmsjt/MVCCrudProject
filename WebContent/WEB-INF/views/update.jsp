@@ -11,17 +11,10 @@
 <body>
 	<h3>Enter data about your giraffe</h3>
 	<form:form action="updateCigar.do" method="POST" modelAttribute="cigar">
-		Name: <form:input path="name" />
+			brand: <form:input path="brand" />
+			 name: <form:input path="name" />
 		<br>
-		Brand: <form:input path="brand" />
-		<br>
-		Amount: <form:input path="amount" />
-		<br>
-		Amount: <form:input path="amount" />
-		<br>
-		Amount: <form:input path="amount" />
-		<br>
-		wrapper: <select name="wrapper">
+			wrapper: <select name="wrapper">
 			<c:forEach items="${wrapperValues}" var="entry">
 				<option value="${entry}">${entry}</option>
 			</c:forEach>
@@ -31,8 +24,9 @@
 				<option value="${entry}">${entry}</option>
 			</c:forEach>
 		</select>
-		<form:hidden path="name" />
-		<input type="submit" value="Update">
+			amount: <form:input path="amount" value="${amount}" />
+		<br>
+		<input type="submit" value="Add a Cigar">
 	</form:form>
 </body>
 </html>

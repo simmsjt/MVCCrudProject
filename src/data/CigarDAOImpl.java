@@ -47,7 +47,11 @@ public class CigarDAOImpl implements CigarDAO {
 
 	@Override
 	public Cigar editCigar(Cigar c) {
-		// TODO Auto-generated method stub
+		for (Cigar cigar : humidor) {
+			if(cigar.getName().equals(c.getName())) {
+				cigar = c;
+			}
+		}
 		return null;
 	}
 

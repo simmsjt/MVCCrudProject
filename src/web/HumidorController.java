@@ -7,13 +7,10 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.skilldistillery.giraffes.data.Giraffe;
 
 import data.Cigar;
 import data.CigarDAO;
@@ -62,12 +59,12 @@ public class HumidorController {
 		return mv;
 	}
 	
-	@RequestMapping(path="update.do" , params="id")
-	public ModelAndView update(
-			@RequestParam("name") String name) {
+	@RequestMapping(path="update.do")
+	public ModelAndView update(@RequestParam("name") String name) {
 		ModelAndView mv = new ModelAndView("update");
-		Cigar c = dao.getCigarByName(name);
-		mv.addObject("cigar",c);
+		mv.addObject("cigar", dao.getCigarByName(name));
+		mv.addObject("wrapperValues", WrapperType.values());
+		mv.addObject("shapeValues", Shape.values());
 		return mv;
 	}
 	

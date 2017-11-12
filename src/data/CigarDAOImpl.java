@@ -37,7 +37,11 @@ public class CigarDAOImpl implements CigarDAO {
 
 	@Override
 	public Cigar deleteCigar(Cigar c) {
+		if(c.getAmount()>1) {
+			c.setAmount(c.getAmount()-1);
+		}else {
 		humidor.remove(c);
+		}
 		return null;
 	}
 

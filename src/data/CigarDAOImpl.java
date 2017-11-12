@@ -25,7 +25,7 @@ public class CigarDAOImpl implements CigarDAO {
 	public Cigar addCigar(Cigar c) {
 		int index = -1;
 		for (Cigar cigar : humidor) {
-			if(cigar.getName().equals(c.getName()) && cigar.getBrand().equals(c.getBrand()))
+			if(cigar.getName().equals(c.getName()))
 				index = humidor.indexOf(cigar);
 		}
 		if(index == -1) {

@@ -28,7 +28,8 @@
 	</form>
 -->
 	<c:forEach var="c" items="${list}">
-		${c.shape} : ${c.wrapper} : ${c.name} : ${brand} : ${c.amount}
+		${c.shape} : ${c.wrapper} : ${c.name} : ${brand} : ${c.amount} 
+		<form action="deleteCigar.do" method="post"><input type="submit" value="Smoke"><input type="hidden" name="cigarName" value="${c.name}"></form>
 		<hr>
 	</c:forEach>
 </body>

@@ -25,7 +25,7 @@ public class CigarDAOImpl implements CigarDAO {
 	public Cigar addCigar(Cigar c) {
 		int index = -1;
 		for (Cigar cigar : humidor) {
-			if(cigar.getName() == c.getName() && cigar.getBrand() == c.getBrand())
+			if(cigar.getName().equals(c.getName()) && cigar.getBrand().equals(c.getBrand()))
 				index = humidor.indexOf(cigar);
 		}
 		if(index == -1) {
@@ -56,6 +56,14 @@ public class CigarDAOImpl implements CigarDAO {
 	@Override
 	public List<Cigar> getCigarsByWrapper(WrapperType w) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Cigar getCigarByName(String name) {
+		for (Cigar cigar : humidor) {
+			if(cigar.getName().equals(name))
+				return cigar;
+		}
 		return null;
 	}
 

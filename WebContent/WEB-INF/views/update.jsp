@@ -9,7 +9,7 @@
 <title>Update Cigar</title>
 </head>
 <body>
-	<h3>Enter data about your giraffe</h3>
+	<h3>Enter data about your cigar</h3>
 	<form:form action="updateCigar.do" method="POST" modelAttribute="cigar">
 			brand: <form:input path="brand" />
 			 name: <form:input path="name" />
@@ -26,7 +26,7 @@
 		</select>
 			amount: <form:input path="amount" value="${amount}" />
 		<br>
-		<input type="submit" value="Add a Cigar">
+		<input type="submit" value="Update Cigar">
 	</form:form>
 </body>
 </html>

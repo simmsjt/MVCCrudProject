@@ -11,11 +11,19 @@ import org.springframework.stereotype.Repository;
 public class CigarDAOImpl implements CigarDAO {
 
 	private List<Cigar> humidor;
+	private Cigar currentWorkingCigar;
 	
 	public CigarDAOImpl() {
 		humidor = new ArrayList<Cigar>();
-		humidor.add(new Cigar("Jim", "apples", WrapperType.CLARO, Shape.CHURCHILL));
+		humidor.add(new Cigar("Jakessmoke", "black", WrapperType.OSCURO, Shape.BELICOSO));
+		humidor.get(0).setAmount(3);
 	}
+	
+	public void setCurrentWorkingCigar(Cigar c) {
+		currentWorkingCigar = c;
+	}
+
+	
 	@Override
 	public List<Cigar> getAllCigars() {
 		return humidor;
@@ -46,15 +54,26 @@ public class CigarDAOImpl implements CigarDAO {
 	}
 
 	@Override
-	public Cigar editCigar(Cigar c) {
-		System.out.println(c);
+	public Cigar editCigar(Cigar newCigar) {
+		currentWorkingCigar.setAmount(newCigar.getAmount());
+		currentWorkingCigar.setBrand(newCigar.getBrand());
+		currentWorkingCigar.setName(newCigar.getName());
+		currentWorkingCigar.setShape(newCigar.getShape());
+		currentWorkingCigar.setWrapper(newCigar.getWrapper());
+		/*
+		currentWorkingCigar.setAmount(amount);
+		System.out.println(newCigar);
+		System.out.println(currentWorkingCigar);
 		for (Cigar cigar : humidor) {
-			if(cigar.getName().equals(c.getName())) {
-				cigar = c;
-				System.out.println(cigar);
+			System.out.println(cigar);
+			if(cigar.getName().equals(newCigar.getName())) {
+				cigar.setAmount(newCigar.getAmount());
+				cigar.setBrand(newCigar.getBrand());
+				cigar.setShape(newCigar.getShape());
+				cigar.setWrapper(newCigar.getWrapper());
 			}
-		}
-	
+		}*/
+		
 		return null;
 	}
 

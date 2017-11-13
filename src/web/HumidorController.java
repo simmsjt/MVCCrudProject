@@ -59,10 +59,23 @@ public class HumidorController {
 		return mv;
 	}
 	
+	/*
 	@RequestMapping(path="update.do")
 	public ModelAndView update(@RequestParam("name") String name) {
 		ModelAndView mv = new ModelAndView("update");
 		Cigar c = dao.getCigarByName(name);
+		mv.addObject("cigar", c);
+		mv.addObject("wrapperValues", WrapperType.values());
+		mv.addObject("shapeValues", Shape.values());
+		mv.addObject("amount", c.getAmount());
+		return mv;
+	}*/
+	
+	@RequestMapping(path="update.do" , params="name")
+	public ModelAndView update(@RequestParam("name") String cigarName) {
+		ModelAndView mv = new ModelAndView("update");
+		Cigar c = dao.getCigarByName(cigarName);
+		dao.setCurrentWorkingCigar(c);
 		mv.addObject("cigar", c);
 		mv.addObject("wrapperValues", WrapperType.values());
 		mv.addObject("shapeValues", Shape.values());

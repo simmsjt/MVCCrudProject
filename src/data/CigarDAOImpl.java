@@ -15,7 +15,7 @@ public class CigarDAOImpl implements CigarDAO {
 	
 	public CigarDAOImpl() {
 		humidor = new ArrayList<Cigar>();
-		humidor.add(new Cigar("Jakessmoke", "black", WrapperType.OSCURO, Shape.BELICOSO));
+		humidor.add(new Cigar("Andalusian Bull", "La Flor Dominicana", WrapperType.OSCURO, Shape.BELICOSO));
 		humidor.get(0).setAmount(3);
 	}
 	

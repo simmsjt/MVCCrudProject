@@ -5,20 +5,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href="css/index.css" rel="stylesheet" type="text/css">
+<link href="css/styles.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Humidor</title>
 </head>
 <body>
-	<a href="add.do"> add a cigar</a>
-	<c:forEach var="c" items="${list}">
-		${c.shape} : ${c.wrapper} : ${c.name} : ${brand} : ${c.amount} 
-		<form action="deleteCigar.do" method="post"><input type="submit" value="Smoke"><input type="hidden" name="cigarName" value="${c.name}"></form>
-		<form method="post" action="update.do">
-			<input type="submit" value="Update">
-			<input type="hidden" name="name" value="${c.name}">
-		</form> 
-		<hr>
-	</c:forEach>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 boxy">
+   		<a href="add.do"> add a cigar</a><br>
+		<c:forEach var="c" items="${list}">
+			${c.shape} : ${c.wrapper} : ${c.name} : ${brand} : ${c.amount} 
+			<div class="row"><div class ="col-sm-6 .col-sm-offset-3"><form action="deleteCigar.do" method="post"><input type="submit" value="Smoke"><input type="hidden" name="cigarName" value="${c.name}"></form></div>
+			<div class ="col-sm-6"><form method="post" action="update.do">
+				<input type="submit" value="Update">
+				<input type="hidden" name="name" value="${c.name}">
+			</form> </div></div>
+			<hr>
+		</c:forEach>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+	
 </body>
 </html>

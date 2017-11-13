@@ -10,6 +10,13 @@ It also allows editing each entry with the update button.
 The home screen.
 
 ![Alt text](screenshots/update.png?raw=true "Title")
-Instructions for using my website...
+The update screen
+
+Click add to add an additional entry
+If you add an existing cigar instead of a new entry appearing it will up
+the amount by one
+
+Clicking smoke will decrement the amount of the entry by one. 
+If there is no remaining amount the entry will disappear.
 
 

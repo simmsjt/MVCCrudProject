@@ -47,11 +47,14 @@ public class CigarDAOImpl implements CigarDAO {
 
 	@Override
 	public Cigar editCigar(Cigar c) {
+		System.out.println(c);
 		for (Cigar cigar : humidor) {
 			if(cigar.getName().equals(c.getName())) {
 				cigar = c;
+				System.out.println(cigar);
 			}
 		}
+	
 		return null;
 	}
 

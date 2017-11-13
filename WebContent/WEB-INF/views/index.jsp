@@ -10,23 +10,6 @@
 </head>
 <body>
 	<a href="add.do"> add a cigar</a>
-	<!--<form action="addCigar.do" method="post">
-		<input type="text" name="name"> 
-		<select name="wrapper">
-			<c:forEach items="${wrapperValues}" var="entry">
-				<option value="${entry}">${entry}</option>
-			</c:forEach>
-		</select>
-		<select name="shape">
-			<c:forEach items="${shapeValues}" var="entry">
-				<option value="${entry}">${entry}</option>
-			</c:forEach>
-		</select>
-
-		<input type="submit" value="Submit">
-
-	</form>
--->
 	<c:forEach var="c" items="${list}">
 		${c.shape} : ${c.wrapper} : ${c.name} : ${brand} : ${c.amount} 
 		<form action="deleteCigar.do" method="post"><input type="submit" value="Smoke"><input type="hidden" name="cigarName" value="${c.name}"></form>

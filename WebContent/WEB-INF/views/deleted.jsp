@@ -10,6 +10,12 @@
 <body>
 	<div class="boxy">
 	<h3>${name} Smoking</h3>
+	<%--  <c:choose>
+        <c:when test="${sessionScope.unit == 1}">AAA</c:when>
+        <c:when test="${sessionScope.unit == 2}">BBB</c:when>
+        <c:when test="${sessionScope.unit == 3}">CCC</c:when>
+        <c:otherwise>undefined</c:otherwise>
+    </c:choose> --%>
 	<img src="https://media1.tenor.com/images/adaa8ac079ba75a7d3a67a3f1eae7f8c/tenor.gif">
 	<br><a href="home.do">Home</a>
 	</div>

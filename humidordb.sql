@@ -83,7 +83,13 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `humidordb`;
-INSERT INTO `wrapper` (`id`, `name`) VALUES (1, 'Maduro');
+INSERT INTO `wrapper` (`id`, `name`) VALUES (1, 'Double_Claro');
+INSERT INTO `wrapper` (`id`, `name`) VALUES (2, 'Claro');
+INSERT INTO `wrapper` (`id`, `name`) VALUES (3, 'Natural');
+INSERT INTO `wrapper` (`id`, `name`) VALUES (4, 'Colorado');
+INSERT INTO `wrapper` (`id`, `name`) VALUES (5, 'Colorado_Maduro');
+INSERT INTO `wrapper` (`id`, `name`) VALUES (6, 'Maduro');
+INSERT INTO `wrapper` (`id`, `name`) VALUES (7, 'Oscuro');
 
 COMMIT;
 
@@ -93,7 +99,20 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `humidordb`;
-INSERT INTO `shape` (`id`, `shape`) VALUES (1, 'Churchill');
+INSERT INTO `shape` (`id`, `shape`) VALUES (1, 'Corona');
+INSERT INTO `shape` (`id`, `shape`) VALUES (2, 'Petit_Corona');
+INSERT INTO `shape` (`id`, `shape`) VALUES (3, 'Churchill');
+INSERT INTO `shape` (`id`, `shape`) VALUES (4, 'Robusto');
+INSERT INTO `shape` (`id`, `shape`) VALUES (5, 'Corona_Gorda');
+INSERT INTO `shape` (`id`, `shape`) VALUES (6, 'Double_Corona');
+INSERT INTO `shape` (`id`, `shape`) VALUES (7, 'Panetela');
+INSERT INTO `shape` (`id`, `shape`) VALUES (8, 'Lonsdale');
+INSERT INTO `shape` (`id`, `shape`) VALUES (9, 'Pyramid');
+INSERT INTO `shape` (`id`, `shape`) VALUES (10, 'Belicoso');
+INSERT INTO `shape` (`id`, `shape`) VALUES (11, 'Torpedo');
+INSERT INTO `shape` (`id`, `shape`) VALUES (12, 'Perfecto');
+INSERT INTO `shape` (`id`, `shape`) VALUES (13, 'Culebra');
+INSERT INTO `shape` (`id`, `shape`) VALUES (14, 'Diadema');
 
 COMMIT;
 
@@ -104,5 +123,6 @@ COMMIT;
 START TRANSACTION;
 USE `humidordb`;
 INSERT INTO `cigar` (`id`, `brand`, `name`, `amount`, `wrapper_id`, `shape_id`) VALUES (1, 'Rose', 'Dark Choclate', '2', 1, 1);
+INSERT INTO `cigar` (`id`, `brand`, `name`, `amount`, `wrapper_id`, `shape_id`) VALUES (2, 'Lobo', 'Fire Leaf II', '3', 3, 5);
 
 COMMIT;

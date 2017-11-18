@@ -1,10 +1,17 @@
 package data;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
+
 
 @Repository
 @Primary
@@ -13,13 +20,15 @@ public class CigarDAOImplSQL implements CigarDAO {
 	private String user = "smoker";
 	private String pass = "smoker";
 	
-	private List<Cigar> humidor;
 	private Cigar currentWorkingCigar;
 	
 	public CigarDAOImplSQL() {
-		humidor = new ArrayList<Cigar>();
-		humidor.add(new Cigar("Andalusian Bull", "La Flor Dominicana", WrapperType.OSCURO, Shape.BELICOSO));
-		humidor.get(0).setAmount(3);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.err.println("Error loading MySQL Driver!!!");
+		}
 	}
 	
 	public void setCurrentWorkingCigar(Cigar c) {
@@ -29,29 +38,85 @@ public class CigarDAOImplSQL implements CigarDAO {
 	
 	@Override
 	public List<Cigar> getAllCigars() {
+		List<Cigar> humidor = new ArrayList<>();
+		try {
+			Connection conn = DriverManager.getConnection(url, user, pass);
+			String sql = "SELECT c.id,c.brand,c.name,c.amount,s.shape,w.name "
+					+ "FROM cigar c JOIN shape s ON "
+					+ "c.shape_id = s.id JOIN wrapper w ON w.id = c.wrapper_id;";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Cigar c = new Cigar();
+				c.setId(rs.getInt(1));
+				c.setBrand(rs.getString(2));
+				c.setName(rs.getString(3));
+				c.setAmount(rs.getInt(4));
+				System.out.println(rs.getString(5));
+				c.setShape(Shape.valueOf(rs.getString(5).toUpperCase()));
+				c.setWrapper(WrapperType.valueOf(rs.getString(6).toUpperCase()));
+				humidor.add(c);
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return humidor;
 	}
 
 	@Override
 	public Cigar addCigar(Cigar c) {
-		int index = -1;
-		for (Cigar cigar : humidor) {
-			if(cigar.getName().equals(c.getName()))
-				index = humidor.indexOf(cigar);
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(url, user, pass);
+			conn.setAutoCommit(false);
+			String sql = "INSERT INTO cigar (brand,name,amount,wrapper_id,shape_id) "
+					+ "VALUES (?,?,?,?,?);";
+			PreparedStatement stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+			ResultSet rs = stmt.getGeneratedKeys();
+			int lastId;
+			while(rs.next()) {
+				lastId = rs.getInt(1);
+				c.setId(lastId);
+				System.out.println(lastId);
+			}
+			
+			//SET STATMENT WITH VALUES
+			stmt.setString(1, c.getBrand());
+			stmt.setString(2, c.getName());
+			stmt.setInt(3, c.getAmount());
+			stmt.setInt(4, c.getWrapper().ordinal());
+			stmt.setInt(5, c.getShape().ordinal());
+			int count = stmt.executeUpdate();
+			if (count == 1) {
+				System.out.println(c.getName() + " " + c.getBrand() + " cigar added.");
+			}
+			conn.commit();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			System.err.println("Error during inserts.");
+			e.printStackTrace();
+			if (conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					System.err.println("Error rolling back.");
+					e1.printStackTrace();
+				}
+			}
 		}
-		if(index == -1) {
-		humidor.add(c);
-		} else
-		humidor.get(index).setAmount(humidor.get(index).getAmount()+c.getAmount());
-		return null;
+		
+		return c;
 	}
-
+	
 	@Override
 	public Cigar deleteCigar(Cigar c) {
 		if(c.getAmount()>1) {
 			c.setAmount(c.getAmount()-1);
 		}else {
-		humidor.remove(c);
 		}
 		return null;
 	}
@@ -79,6 +144,10 @@ public class CigarDAOImplSQL implements CigarDAO {
 		
 		return null;
 	}
+	
+	public Cigar getCigarById() {
+		
+	}
 
 	@Override
 	public List<Cigar> getCigarsByShape(Shape s) {
@@ -91,6 +160,14 @@ public class CigarDAOImplSQL implements CigarDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Cigar getCigarByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/*
 	@Override
 	public Cigar getCigarByName(String name) {
 		for (Cigar cigar : humidor) {
@@ -99,5 +176,5 @@ public class CigarDAOImplSQL implements CigarDAO {
 		}
 		return null;
 	}
-
+*/
 }

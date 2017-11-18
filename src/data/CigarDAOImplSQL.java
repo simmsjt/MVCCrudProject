@@ -7,13 +7,16 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 @Repository
-//@Primary
-public class CigarDAOImpl implements CigarDAO {
-
+@Primary
+public class CigarDAOImplSQL implements CigarDAO {
+	private static final String url = "jdbc:mysql://localhost:3306/humidordb";
+	private String user = "smoker";
+	private String pass = "smoker";
+	
 	private List<Cigar> humidor;
 	private Cigar currentWorkingCigar;
 	
-	public CigarDAOImpl() {
+	public CigarDAOImplSQL() {
 		humidor = new ArrayList<Cigar>();
 		humidor.add(new Cigar("Andalusian Bull", "La Flor Dominicana", WrapperType.OSCURO, Shape.BELICOSO));
 		humidor.get(0).setAmount(3);

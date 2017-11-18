@@ -17,6 +17,7 @@
 	
 	<form:form action="updateCigar.do" method="POST" modelAttribute="cigar">
 		<div class="row">
+		${c.name}
 		<div class="col-sm-6">
 			brand: <form:input path="brand" /></div>
 		<div class="col-sm-6">
@@ -34,6 +35,7 @@
 			shape: <select name="shape">
 			<c:forEach items="${shapeValues}" var="entry">
 				<option value="${entry}">${entry}</option>
+				
 			</c:forEach>
 		</select>
 		</div>
@@ -46,6 +48,7 @@
 		</div>
 		<div class="col-md-4">
 		<input type="submit" value="Update Cigar">
+		<input type="hidden" name="id" value="${cigar.id}">
 		</div></div>
 	</form:form>
 	</div>

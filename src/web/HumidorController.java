@@ -63,8 +63,8 @@ public class HumidorController {
 	@RequestMapping(path="update.do" , params="id")
 	public ModelAndView update(@RequestParam("id") int id) {
 		ModelAndView mv = new ModelAndView("update");
+		System.out.println(id);
 		Cigar c = dao.getCigarById(id);
-		dao.setCurrentWorkingCigar(c);
 		mv.addObject("cigar", c);
 		mv.addObject("wrapperValues", WrapperType.values());
 		mv.addObject("shapeValues", Shape.values());

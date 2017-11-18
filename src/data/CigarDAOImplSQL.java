@@ -114,43 +114,56 @@ public class CigarDAOImplSQL implements CigarDAO {
 	
 	@Override
 	public Cigar deleteCigar(Cigar c) {
+		c.setAmount(c.getAmount()-1);
 		if(c.getAmount()>1) {
-			c.setAmount(c.getAmount()-1);
+			editCigar(c);
 		}else {
+			try {
+				Connection conn = DriverManager.getConnection(url, user, pass);
+				String sql = "DELETE FROM cigar " + 
+						"WHERE id=?;";
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, c.getId());
+				stmt.executeUpdate();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		return null;
+		return c;
 	}
 
 	@Override
-	public Cigar editCigar(Cigar newCigar) {
-		currentWorkingCigar.setAmount(newCigar.getAmount());
-		currentWorkingCigar.setBrand(newCigar.getBrand());
-		currentWorkingCigar.setName(newCigar.getName());
-		currentWorkingCigar.setShape(newCigar.getShape());
-		currentWorkingCigar.setWrapper(newCigar.getWrapper());
-		/*
-		currentWorkingCigar.setAmount(amount);
-		System.out.println(newCigar);
-		System.out.println(currentWorkingCigar);
-		for (Cigar cigar : humidor) {
-			System.out.println(cigar);
-			if(cigar.getName().equals(newCigar.getName())) {
-				cigar.setAmount(newCigar.getAmount());
-				cigar.setBrand(newCigar.getBrand());
-				cigar.setShape(newCigar.getShape());
-				cigar.setWrapper(newCigar.getWrapper());
-			}
-		}*/
-		
-		return null;
+	public Cigar editCigar(Cigar c) {
+		try {
+			Connection conn = DriverManager.getConnection(url, user, pass);
+			String sql = "UPDATE cigar SET brand = ?,name=?,"
+					+ "amount=?, shape_id=?, wrapper_id=? WHERE id = ?;";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, c.getBrand());
+			stmt.setString(2, c.getName());
+			stmt.setInt(3, c.getAmount());
+			stmt.setInt(4, c.getShape().ordinal()+1);
+			stmt.setInt(5, c.getWrapper().ordinal()+1);
+			stmt.setInt(6, c.getId());
+			
+			stmt.executeUpdate();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return c;
 	}
 	
 	public Cigar getCigarById(int id) {
 		Cigar c = new Cigar();
 		try {
 			Connection conn = DriverManager.getConnection(url, user, pass);
-			String sql = "SELECT id,brand,name,amount,wrapper_id,shape_id FROM" + 
-						"cigar WHERE id = ?;";
+			String sql = "SELECT c.id,c.brand,c.name,c.amount,s.shape, w.name FROM" + 
+						" cigar c JOIN shape s ON c.shape_id = s.id "
+						+ "JOIN wrapper w ON w.id = c.wrapper_id WHERE c.id = ?;";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();

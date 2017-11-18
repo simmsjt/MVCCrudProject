@@ -18,7 +18,8 @@
 		<c:forEach var="c" items="${list}">
 			${c.shape} : ${c.wrapper} : ${c.name} : ${c.brand} : ${c.amount} 
 			<div class="row"><div class ="col-sm-6 .col-sm-offset-3">
-			<form action="deleteCigar.do" method="post"><input type="submit" value="Smoke">
+			<form action="deleteCigar.do" method="post">
+			<input type="submit" value="Smoke">
 			<input type="hidden" name="id" value="${c.id}">
 			</form>
 			</div>

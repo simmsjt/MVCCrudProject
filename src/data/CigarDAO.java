@@ -8,7 +8,7 @@ public interface CigarDAO {
 	List<Cigar> getCigarsByWrapper(WrapperType w);
 	Cigar addCigar(Cigar c);
 	Cigar deleteCigar(Cigar c);
-	Cigar editCigar(Cigar newCigar);
+	Cigar editCigar(Cigar c);
 	Cigar getCigarById(int id);
 	void setCurrentWorkingCigar(Cigar c);
 }

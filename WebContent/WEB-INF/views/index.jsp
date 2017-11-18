@@ -16,11 +16,16 @@
     <div class="col-md-4 boxy">
    		<a href="add.do"> add a cigar</a><br>
 		<c:forEach var="c" items="${list}">
-			${c.shape} : ${c.wrapper} : ${c.name} : ${brand} : ${c.amount} 
-			<div class="row"><div class ="col-sm-6 .col-sm-offset-3"><form action="deleteCigar.do" method="post"><input type="submit" value="Smoke"><input type="hidden" name="cigarName" value="${c.name}"></form></div>
-			<div class ="col-sm-6"><form method="post" action="update.do">
+			${c.shape} : ${c.wrapper} : ${c.name} : ${c.brand} : ${c.amount} 
+			<div class="row"><div class ="col-sm-6 .col-sm-offset-3">
+			<form action="deleteCigar.do" method="post"><input type="submit" value="Smoke">
+			<input type="hidden" name="id" value="${c.id}">
+			</form>
+			</div>
+			<div class ="col-sm-6">
+			<form method="post" action="update.do">
 				<input type="submit" value="Update">
-				<input type="hidden" name="name" value="${c.name}">
+				<input type="hidden" name="id" value="${c.id}">
 			</form> </div></div>
 			<hr>
 		</c:forEach>

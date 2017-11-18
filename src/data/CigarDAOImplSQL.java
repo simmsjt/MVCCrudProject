@@ -87,8 +87,8 @@ public class CigarDAOImplSQL implements CigarDAO {
 			stmt.setString(1, c.getBrand());
 			stmt.setString(2, c.getName());
 			stmt.setInt(3, c.getAmount());
-			stmt.setInt(4, c.getWrapper().ordinal());
-			stmt.setInt(5, c.getShape().ordinal());
+			stmt.setInt(4, c.getWrapper().ordinal()+1);
+			stmt.setInt(5, c.getShape().ordinal()+1);
 			int count = stmt.executeUpdate();
 			if (count == 1) {
 				System.out.println(c.getName() + " " + c.getBrand() + " cigar added.");
@@ -145,8 +145,31 @@ public class CigarDAOImplSQL implements CigarDAO {
 		return null;
 	}
 	
-	public Cigar getCigarById() {
-		
+	public Cigar getCigarById(int id) {
+		Cigar c = new Cigar();
+		try {
+			Connection conn = DriverManager.getConnection(url, user, pass);
+			String sql = "SELECT id,brand,name,amount,wrapper_id,shape_id FROM" + 
+						"cigar WHERE id = ?;";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+			    c.setId(rs.getInt(1));
+				c.setBrand(rs.getString(2));
+				c.setName(rs.getString(3));
+				c.setAmount(rs.getInt(4));
+				System.out.println(rs.getString(5));
+				c.setShape(Shape.valueOf(rs.getString(5).toUpperCase()));
+				c.setWrapper(WrapperType.valueOf(rs.getString(6).toUpperCase()));
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return c;
 	}
 
 	@Override
@@ -161,20 +184,5 @@ public class CigarDAOImplSQL implements CigarDAO {
 		return null;
 	}
 
-	@Override
-	public Cigar getCigarByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	/*
-	@Override
-	public Cigar getCigarByName(String name) {
-		for (Cigar cigar : humidor) {
-			if(cigar.getName().equals(name))
-				return cigar;
-		}
-		return null;
-	}
-*/
+
 }

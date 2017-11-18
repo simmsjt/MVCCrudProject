@@ -88,12 +88,20 @@ public class CigarDAOImpl implements CigarDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	/*
 	@Override
 	public Cigar getCigarByName(String name) {
 		for (Cigar cigar : humidor) {
 			if(cigar.getName().equals(name))
 				return cigar;
 		}
+		return null;
+	}
+	*/
+
+	@Override
+	public Cigar getCigarById(int id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
